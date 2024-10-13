@@ -1,18 +1,17 @@
 import hashlib
 import streamlit as st
-from db_config import get_user_by_user
+from db_config import get_user_by_email
 
-def hash_password(password):
-    return hashlib.sha256(password.encode()).hexdigest()
 
-def login(user, password):
-    user = get_user_by_user(user)
-    if user and user['senha_hash'] == hash_password(password):
+
+def login(email, password):
+    user = get_user_by_email(email)
+    if user and user['senha_hash'] == password:
         return user
     return None
 
-def authenticate_user(user, password):
-    user = login(user, password)
+def authenticate_user(email, password):
+    user = login(email, password)
     if user:
         st.session_state['user'] = user
         return True
