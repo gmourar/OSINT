@@ -8,8 +8,8 @@ def get_connection():
         db='osint_db'
     )
 
-def get_user_by_email(email):
+def get_user_by_user(user):
     conn = get_connection()
     with conn.cursor(pymysql.cursors.DictCursor) as cursor:
-        cursor.execute("SELECT * FROM usuarios WHERE email=%s", (email,))
+        cursor.execute("SELECT * FROM usuarios WHERE user=%s", (user,))
         return cursor.fetchone()
