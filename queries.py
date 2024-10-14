@@ -24,12 +24,30 @@ class AdminQueries:
         '''
         
         # Consulta para contar o número de análises realizadas por cada usuário
-        self.analise_por_usuario = '''
+        self.total_analise_por_usuario = '''
             SELECT u.nome, COUNT(a.id_analise) AS quantidade
             FROM osint.analise_osint a
             JOIN osint.usuarios u ON a.id_usuario = u.id_usuario
             GROUP BY u.nome;
         '''
+
+
+        self.usuario_por_funcao = '''
+            SELECT u.nome, r.nome_role
+            FROM osint.usuarios u
+            JOIN osint.roles r ON u.id_role = r.id_role;
+
+        '''
+
+        self.analise_por_usuario = '''
+          SELECT a.descricao, u.nome AS usuario
+            FROM osint.analise_osint a
+            JOIN osint.usuarios u ON a.id_usuario = u.id_usuario;
+        '''
+
+        
+
+       
 
     def get_analise_status(self):
         """Retorna a consulta para análise por status."""
@@ -43,8 +61,14 @@ class AdminQueries:
         """Retorna a consulta para contagem de usuários ativos e inativos."""
         return self.usuarios_ativos_inativos
     
-    def get_analise_usuario(self):
+    def get_total_analise_usuario(self):
         """Retorna a consulta para contagem de análises por usuário."""
+        return self.total_analise_por_usuario
+    
+    def get_usuario_por_funcao(self):
+        return self.usuario_por_funcao
+    
+    def get_analise_por_usuario(self):
         return self.analise_por_usuario
 
 

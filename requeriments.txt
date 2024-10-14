@@ -1,8 +1,5 @@
 streamlit
-pandas
-SQLAlchemy
-pymysql  
-bcrypt
-plotly  
-sqlmodel  
 streamlit-authenticator
+pandas
+psycopg2
+plotly  
