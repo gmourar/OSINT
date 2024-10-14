@@ -1,14 +1,14 @@
-import hashlib
+# auth.py
 import streamlit as st
 from db_config import get_user_by_email
-
-
 
 def login(email, password):
     user = get_user_by_email(email)
     if user and user['senha_hash'] == password:
+        if user['status'] != 'ativo':  
+            st.error("Seu login não pode ser efetuado, pois sua conta está inativa.")
+            return None
         return user
-    return None
 
 def authenticate_user(email, password):
     user = login(email, password)

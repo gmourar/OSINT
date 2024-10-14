@@ -1,3 +1,4 @@
+# db_config.py
 import psycopg2
 import psycopg2.extras
 from credentials import Credentials
@@ -9,7 +10,6 @@ port = creds.get_port()
 user = creds.get_user()
 password = creds.get_password()
 db_name = creds.get_db_name()
-
 
 def get_connection():
     try:
@@ -28,26 +28,17 @@ def get_connection():
     except psycopg2.DatabaseError as e:
         print(f"Erro ao conectar ao banco de dados: {e}")
         return None
-    
-def testar_conn():
-    get_connection()
-
-import psycopg2.extras  # Certifique-se de importar isso para usar o DictCursor
 
 def get_user_by_email(email):
     conn = get_connection()
     try:
-        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:  # Usando DictCursor para dicionários
+        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
             cursor.execute("SELECT * FROM usuarios WHERE email=%s", (email,))
-            user = cursor.fetchone() 
-            print(user)
+            user = cursor.fetchone()
             return user
-    except UnicodeDecodeError as e:
-        print(f"Erro de decodificação: {e}")
+    except Exception as e:
+        print(f"Erro ao buscar usuário: {e}")
         return None
     finally:
         if conn:
             conn.close()
-
-
-

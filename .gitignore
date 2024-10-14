@@ -1,1 +1,3 @@
 credentials.py
+db_scripts\new_inserts.sql
+db_scripts\old_inserts.sql
