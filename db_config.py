@@ -23,7 +23,7 @@ def get_connection():
         )
         with conn.cursor() as cursor:
             cursor.execute("SET search_path TO osint;")
-        print("Conexão estabelecida com sucesso.")
+        print("Dados Atualizados.")
         return conn
     except psycopg2.DatabaseError as e:
         print(f"Erro ao conectar ao banco de dados: {e}")

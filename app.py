@@ -3,6 +3,10 @@ from auth import authenticate_user, is_admin, logout
 from views.admin_dash import admin_dash
 from views.user_dash import user_dash
 #from db_config import testar_conn
+import time as tm
+
+UPDATE_INTERVAL =  5
+
 
 st.set_page_config(layout="wide")
 st.title('OSINT')
@@ -30,4 +34,7 @@ else:
     if st.button("Logout"):
         logout()
         st.rerun()
+
+    tm.sleep(UPDATE_INTERVAL)
+    st.rerun()
 

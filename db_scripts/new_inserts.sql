@@ -37,3 +37,50 @@ INSERT INTO osint.eventos_seguranca (id_evento, descricao, nivel_seguranca, acao
 (gen_random_uuid(), 'Falha na análise de dados', 'Baixo', 'Revisão manual'),
 (gen_random_uuid(), 'Novo registro de URL na Surface Web', 'Baixo', 'Análise de segurança'),
 (gen_random_uuid(), 'Acesso a URL da Tor', 'Alto', 'Investigação detalhada');
+
+
+
+
+SET search_path TO osint;
+
+select * from usuarios;
+
+select * from roles;
+
+SHOW server_encoding;
+SHOW client_encoding;
+
+select * from auditoria_movimentacao;
+
+
+
+select * from analise_osint;
+
+
+select * from eventos_seguranca;
+select * from auditoria_analise;
+
+
+select * from auditoria_analise
+where status = 'concluída';
+
+
+SELECT a.descricao, u.nome AS usuario
+FROM osint.analise_osint a
+JOIN osint.usuarios u ON a.id_usuario = u.id_usuario;
+
+SELECT u.nome, r.nome_role
+FROM osint.usuarios u
+JOIN osint.roles r ON u.id_role = r.id_role;
+
+
+INSERT INTO osint.usuarios (id_usuario, nome, email, senha_hash, status, data_criacao, id_role) VALUES
+(gen_random_uuid(), 'matheus', 'matheus@example.com', 'hash1', 'ativo', CURRENT_TIMESTAMP, 1);
+
+
+UPDATE osint.usuarios
+SET id_role = 4
+WHERE nome = 'matheus';
+
+
+

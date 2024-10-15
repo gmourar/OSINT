@@ -62,7 +62,6 @@ def admin_dash():
         usuario_df = pd.DataFrame(usuario_data, columns=["Usuário", "Quantidade"])
         
         
-        st.write("Análise por Usuário")
         fig_bubble = px.scatter(usuario_df, x='Usuário', y='Quantidade', size='Quantidade', color='Usuário', title='Análise por Usuário', color_discrete_sequence=px.colors.sequential.Cividis)
         st.plotly_chart(fig_bubble)
 
@@ -83,11 +82,9 @@ def admin_dash():
     if analise_usuario_data:
         analise_usuario_df = pd.DataFrame(analise_usuario_data, columns=["Descrição", "Usuário"])
         
-        st.write("Análise por Usuário")
         fig_treemap = px.treemap(
             analise_usuario_df, 
             path=['Usuário', 'Descrição'], 
-            title='Análise por Usuário', 
             color='Usuário', 
             color_discrete_sequence=px.colors.sequential.Rainbow
         )
